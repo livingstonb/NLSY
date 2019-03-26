@@ -32,7 +32,12 @@ local longvars 	age
 				panwt
 				networth
 				hhincome
-				hhincsource;
+				hhincsource
+				hours
+				lim_kindwork
+				lim_amountwork
+				occupation;
+
 quietly reshape long `longvars', i(id) j(year);
 label variable year "INTERVIEW YEAR";
 label variable age "AGE AT INTERVIEW";
@@ -55,6 +60,10 @@ label variable panwt "SAMPLE WTS, PANEL METHOD";
 label variable networth "HH NET WORTH";
 label variable hhincome "HH INCOME";
 label variable hhincsource "HH INCOME SOURCE";
+label variable hours "ANNUAL HOURS WORKED";
+label variable lim_kindwork "LIMITED IN KIND OF WORK BC OF HEALTH";
+label variable lim_amountwork "LIMITED IN AMOUNT OF WORK BC OF HEALTH";
+label variable occupation "OCC OF MOST RECENT JOB, 2002 CENSUS CODE";
 
 // code missing variables;
 do code/build2_missing.do;
