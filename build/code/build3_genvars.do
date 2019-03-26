@@ -2,30 +2,30 @@
 
 /* -----------------------------------------------------------------------------
 VARIABLE CREATION
-*/;
+-----------------------------------------------------------------------------*/;
 
 label define toplabel 1 "YES" 0 "NO";
 
-// topcode indicator for wages;
-gen wtopcode = 0 if !missing(wage);
-replace wtopcode = 1 if (wage == 14048) & (year == 1998);
-replace wtopcode = 1 if (wage == 25249) & (year == 1999);
-replace wtopcode = 1 if (wage == 30623) & (year == 2000);
-replace wtopcode = 1 if (wage == 35558) & (year == 2001);
-replace wtopcode = 1 if (wage == 42458) & (year == 2002);
-replace wtopcode = 1 if (wage == 44091) & (year == 2003);
-replace wtopcode = 1 if (wage == 70712) & (year == 2004);
-replace wtopcode = 1 if (wage == 69342) & (year == 2005);
-replace wtopcode = 1 if (wage == 80471) & (year == 2006);
-replace wtopcode = 1 if (wage == 112215) & (year == 2007);
-replace wtopcode = 1 if (wage == 104353) & (year == 2008);
-replace wtopcode = 1 if (wage == 121993) & (year == 2009);
-replace wtopcode = 1 if (wage == 130254) & (year == 2010);
-replace wtopcode = 1 if (wage == 146002) & (year == 2011);
-replace wtopcode = 1 if (wage == 180331) & (year == 2013);
-replace wtopcode = 1 if (wage == 212641) & (year == 2015);
-label variable wtopcode "WAGE INCOME, TOPCODED?";
-label values wtopcode toplabel;
+// topcode indicator for income;
+gen inctopcode = 0 if !missing(income);
+replace inctopcode = 1 if (income == 14048) & (year == 1998);
+replace inctopcode = 1 if (income == 25249) & (year == 1999);
+replace inctopcode = 1 if (income == 30623) & (year == 2000);
+replace inctopcode = 1 if (income == 35558) & (year == 2001);
+replace inctopcode = 1 if (income == 42458) & (year == 2002);
+replace inctopcode = 1 if (income == 44091) & (year == 2003);
+replace inctopcode = 1 if (income == 70712) & (year == 2004);
+replace inctopcode = 1 if (income == 69342) & (year == 2005);
+replace inctopcode = 1 if (income == 80471) & (year == 2006);
+replace inctopcode = 1 if (income == 112215) & (year == 2007);
+replace inctopcode = 1 if (income == 104353) & (year == 2008);
+replace inctopcode = 1 if (income == 121993) & (year == 2009);
+replace inctopcode = 1 if (income == 130254) & (year == 2010);
+replace inctopcode = 1 if (income == 146002) & (year == 2011);
+replace inctopcode = 1 if (income == 180331) & (year == 2013);
+replace inctopcode = 1 if (income == 212641) & (year == 2015);
+label variable inctopcode "ANNUAL INCOME, TOPCODED?";
+label values inctopcode toplabel;
 
 // topcode indicator for net worth;
 gen nwtopcode = 0 if !missing(networth);
@@ -91,9 +91,18 @@ label variable bullied_12to18 "BULLIED BETWEEN AGES 12 AND 18";
 gen height = feet * 12 + inches;
 label variable height "TOTAL HEIGHT IN INCHES";
 
+// income variables;
+gen incomerate = income / hours;
+gen lincomerate = log(incomerate);
+gen lincome = log(income);
+label variable incomerate "INCOME/HR WORKED, CONVERTED FROM ANN INC";
+label variable lincomerate "LOG INCOME/HR WORKED, CONVERTED FROM ANN INC";
+label variable lincome "LOG ANNUAL INCOME";
+
+
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS
-*/;
+-----------------------------------------------------------------------------*/;
 
 // data is provided with 2 implied decimal places (e.g. 300 instead of 3.00);
 replace cgpa = cgpa / 100;

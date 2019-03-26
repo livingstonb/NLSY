@@ -18,7 +18,7 @@ local longvars	age
 				highgrade 
 				highdegr 
 				piat
-				wage
+				income
 				children
 				health
 				energy
@@ -39,16 +39,17 @@ local longvars	age
 				lim_amountwork
 				occupation
 				urban
-				cregion;
+				cregion
+				workwks;
 
 quietly reshape long `longvars', i(id) j(year);
-label variable year "INTERVIEW YEAR";
-label variable age "AGE AT INTERVIEW";
+label variable year "YEAR";
+label variable age "AGE";
 label variable hhsize "HH SIZE";
 label variable highgrade "HIGHEST GRADE COMPLETED";
 label variable highdegr "HIGHEST DEG COMPLETED";
 label variable piat "PIAT MATH SCORE (PCT)";
-label variable wage "TOT INC FROM WAGES, SALARY IN PAST YEAR";
+label variable income "TOT INC FROM WAGES AND SALARY, REPORTED IN YEAR+1";
 label variable children "NUMBER OF CHILDREN";
 label variable health "HOW IS GENERAL HEALTH?";
 label variable energy "ENERGY LEVEL, PAST 4 WKS";
@@ -69,6 +70,7 @@ label variable lim_amountwork "LIMITED IN AMOUNT OF WORK BC OF HEALTH";
 label variable occupation "OCC OF MOST RECENT JOB, 2002 CENSUS CODE";
 label variable urban "CURRENT RESIDENCE IN URBAN/RURAL AREA";
 label variable cregion "CENSUS REGION OF RESIDENCE";
+label variable workwks "# OF WEEKS WORKED IN ANY JOB THIS YEAR";
 
 label define deglab 0 "NONE" 1 "GED" 2 "HS" 3 "ASSOCIATES" 4 "BS" 5 "MS" 6 "PHD" 7 "PRO";
 label values highdegr deglab;
