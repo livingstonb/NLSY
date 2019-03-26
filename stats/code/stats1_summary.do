@@ -16,8 +16,35 @@ drop teenh adulth;
 /* -----------------------------------------------------------------------------
 COMPUTATION
 -----------------------------------------------------------------------------*/;
-mean teenheight adultheight age lincomerate teenhhsize if adultheight <= adultmedianht;
+local sumvars 	teenheight
+				adultheight
+				age
+				lincomerate
+				cumhighgrade
+				evermarried
+				div_sep
+				resmother_highgrade
+				resfather_highgrade
+				teenhhsize;
+
+mean `sumvars' if adultheight <= adultmedianht;
 est store BELOWMED;
-mean teenheight adultheight age lincomerate teenhhsize if adultheight > adultmedianht;
+mean `sumvars' if adultheight > adultmedianht;
 est store ABOVEMED;
-esttab BELOWMED ABOVEMED;
+
+local title1 "Adult Height <= Median";
+local title2 "Adult Height > Median"; 
+esttab BELOWMED ABOVEMED, 	nostar
+							se
+							mtitles("`title1'" "`title2'")
+							coeflabels(	teenheight "Teen height (inches)"
+										adultheight "Adult height (inches)"
+										age "Age"
+										lincomerate "ln(wage per hour)"
+										cumhighgrade "Years of completed schooling"
+										evermarried "Ever Married (%)"
+										div_sep "Divorced or separated (%)"
+										resmother_highgrade "Mother's years of schooling"
+										resfather_highgrade "Father's years of schooling"
+										teenhhsize "Number of HH members in youth"
+										);

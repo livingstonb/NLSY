@@ -39,7 +39,8 @@ local longvars	age
 				occupation
 				urban
 				cregion
-				workwks;
+				workwks
+				married;
 
 quietly reshape long `longvars', i(id) j(year);
 label variable year "YEAR";
@@ -69,6 +70,7 @@ label variable occupation "OCC OF MOST RECENT JOB, 2002 CENSUS CODE";
 label variable urban "CURRENT RESIDENCE IN URBAN/RURAL AREA";
 label variable cregion "CENSUS REGION OF RESIDENCE";
 label variable workwks "# OF WEEKS WORKED IN ANY JOB THIS YEAR";
+label variable married "MARITAL STATUS";
 
 label define deglab 0 "NONE" 1 "GED" 2 "HS" 3 "ASSOCIATES" 4 "BS" 5 "MS" 6 "PHD" 7 "PRO";
 label values highdegr deglab;
@@ -81,6 +83,8 @@ label define urbanlab 0 "RURAL" 1 "URBAN";
 label values urban urbanlab;
 label define regionlab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST";
 label values cregion regionlab;
+label define marlab 0 "NEVER MARRIED" 1 "MARRIED" 2 "SEPARATED" 3 "DIVORCED" 4 "WIDOWED";
+label values married marlab;
 
 // code missing variables;
 do code/build2_missing.do;

@@ -21,7 +21,8 @@ local vars 	biofather_highgrade
 			biomother_highgrade
 			resfather_highgrade
 			resmother_highgrade
-			highgrade;
+			highgrade
+			cumhighgrade;
 			
 foreach var of local vars {;
 	replace `var' = . if `var' == 95;
