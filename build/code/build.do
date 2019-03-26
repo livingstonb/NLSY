@@ -31,7 +31,6 @@ local longvars	age
 				bullied_12to18_y
 				cumwt
 				panwt
-				networth
 				hhincome
 				hhincsource
 				hours
@@ -49,7 +48,7 @@ label variable hhsize "HH SIZE";
 label variable highgrade "HIGHEST GRADE COMPLETED";
 label variable highdegr "HIGHEST DEG COMPLETED";
 label variable piat "PIAT MATH SCORE (PCT)";
-label variable income "TOT INC FROM WAGES AND SALARY, REPORTED IN YEAR+1";
+label variable income "ANNUAL INC FROM WAGES AND SALARY, REPORTED IN YEAR+1";
 label variable children "NUMBER OF CHILDREN";
 label variable health "HOW IS GENERAL HEALTH?";
 label variable energy "ENERGY LEVEL, PAST 4 WKS";
@@ -61,7 +60,6 @@ label variable emotlim "EMOTIONAL LIMITATIONS ON PROD";
 label variable painlim "PAIN LIMITATIONS ON PROD";
 label variable cumwt "SAMPLE WTS, CUMULATIVE METHOD";
 label variable panwt "SAMPLE WTS, PANEL METHOD";
-label variable networth "HH NET WORTH";
 label variable hhincome "HH INCOME";
 label variable hhincsource "HH INCOME SOURCE";
 label variable hours "ANNUAL HOURS WORKED";

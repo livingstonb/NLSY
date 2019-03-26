@@ -28,10 +28,26 @@ label variable inctopcode "ANNUAL INCOME, TOPCODED?";
 label values inctopcode toplabel;
 
 // topcode indicator for net worth;
-gen nwtopcode = 0 if !missing(networth);
-replace nwtopcode = 1 if networth == 600000;
-label variable nwtopcode "NET WORTH, TOPCODED?";
-label values nwtopcode toplabel;
+gen nwtopcode20 = 0 if !missing(networth20);
+replace nwtopcode20 = 1 if networth20 == 600000;
+label variable nwtopcode20 "NET WORTH AT AGE 20, TOPCODED?";
+
+gen nwtopcode25 = 0 if !missing(networth25);
+replace nwtopcode25 = 1 if networth25 == 600000;
+label variable nwtopcode25 "NET WORTH AT AGE 25, TOPCODED?";
+
+gen nwtopcode30 = 0 if !missing(networth30);
+replace nwtopcode30 = 1 if networth30 == 600000;
+label variable nwtopcode30 "NET WORTH AT AGE 30, TOPCODED?";
+
+gen nwtopcode35 = 0 if !missing(networth35);
+replace nwtopcode35 = 1 if networth35 == 600000;
+label variable nwtopcode35 "NET WORTH AT AGE 35, TOPCODED?";
+
+label values nwtopcode20 toplabel;
+label values nwtopcode25 toplabel;
+label values nwtopcode30 toplabel;
+label values nwtopcode35 toplabel;
 
 // topcode indicator for 1997 hh net worth according to parent;
 gen nwP1997topcode = 0 if !missing(networthP1997);
@@ -99,6 +115,22 @@ label variable incomerate "INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincomerate "LOG INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincome "LOG ANNUAL INCOME";
 
+// teen and adult height;
+gen teentemp = height if year == 1997;
+bysort id: egen teenheight = max(teentemp);
+label variable teenheight "HEIGHT (IN) IN 1997";
+
+gen adulttemp = height if year == 2011;
+bysort id: egen adultheight = max(adulttemp);
+label variable adultheight "HEIGHT (IN) IN 2011";
+
+drop teentemp adulttemp;
+
+// hh size as a teen;
+gen temp = hhsize if year == 1998;
+bysort id: egen teenhhsize = max(temp);
+label variable teenhhsize "HH SIZE IN 1998";
+drop temp;
 
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS
