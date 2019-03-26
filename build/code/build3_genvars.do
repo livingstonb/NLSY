@@ -83,9 +83,13 @@ drop healthlim emotlim painlim;
 // bullied between ages 12 and 18;
 bysort id: egen bullied_12to18 = max(bullied_12to18_y);
 drop bullied_12to18_y;
+label define bullied_12to18lab 1 "YES" 0 "NO";
+label values bullied_12to18 bullied_12to18lab;
+label variable bullied_12to18 "BULLIED BETWEEN AGES 12 AND 18";
 
 // generate variable for total height in inches;
 gen height = feet * 12 + inches;
+label variable height "TOTAL HEIGHT IN INCHES";
 
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS

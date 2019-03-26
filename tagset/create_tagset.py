@@ -5,14 +5,14 @@ import re
 ###
 
 # specify tagset directory, which should must variables.txt
-OS = 'windows'
+OS = 'mac'
 
 if OS == 'linux':
 	tagset_dir = "/home/brian/Dropbox/BrianLivingstonRA/Height/NLSY/tagset/"
 elif OS == 'windows':
 	tagset_dir = "C://Users/Brian/Dropbox/BrianLivingstonRA/Height/NLSY/tagset/"
 elif OS == 'mac':
-	tagset_dir = "/Users/livingstonb/Dropbox/BrianLivingstonRA/Height/NLSY/tagset/"
+	tagset_dir = "/Users/brianlivingston/Dropbox/BrianLivingstonRA/Height/NLSY/tagset/"
 	
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------

@@ -5,6 +5,7 @@
 cd ${build};
 
 // read data;
+clear;
 quietly infile using input/NLSY97.dct;
 quietly do input/NLSY97-value-labels.do;
 
@@ -37,7 +38,8 @@ local longvars	age
 				lim_kindwork
 				lim_amountwork
 				occupation
-				urban;
+				urban
+				cregion;
 
 quietly reshape long `longvars', i(id) j(year);
 label variable year "INTERVIEW YEAR";
@@ -66,6 +68,19 @@ label variable lim_kindwork "LIMITED IN KIND OF WORK BC OF HEALTH";
 label variable lim_amountwork "LIMITED IN AMOUNT OF WORK BC OF HEALTH";
 label variable occupation "OCC OF MOST RECENT JOB, 2002 CENSUS CODE";
 label variable urban "CURRENT RESIDENCE IN URBAN/RURAL AREA";
+label variable cregion "CENSUS REGION OF RESIDENCE";
+
+label define deglab 0 "NONE" 1 "GED" 2 "HS" 3 "ASSOCIATES" 4 "BS" 5 "MS" 6 "PHD" 7 "PRO";
+label values highdegr deglab;
+label define healthlab 1 "EXCELLENT" 2 "VERY GOOD" 3 "GOOD" 4 "FAIR" 5 "POOR";
+label values health healthlab;
+label define limwork 1 "YES" 0 "NO";
+label values lim_kindwork limwork;
+label values lim_amountwork limwork;
+label define urbanlab 0 "RURAL" 1 "URBAN";
+label values urban urbanlab;
+label define regionlab 1 "NORTHEAST" 2 "NORTH CENTRAL" 3 "SOUTH" 4 "WEST";
+label values cregion regionlab;
 
 // code missing variables;
 do code/build2_missing.do;
