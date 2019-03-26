@@ -1,3 +1,5 @@
 **/input
 **/output
 *.dta
+default.NLSY97
+*.DS_Store

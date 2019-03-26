@@ -12,7 +12,7 @@ quietly do input/NLSY97-value-labels.do;
 do code/build1_rename.do;
 
 // reshape long;
-local longvars 	age 
+local longvars	age 
 				hhsize 
 				highgrade 
 				highdegr 
@@ -36,7 +36,8 @@ local longvars 	age
 				hours
 				lim_kindwork
 				lim_amountwork
-				occupation;
+				occupation
+				urban;
 
 quietly reshape long `longvars', i(id) j(year);
 label variable year "INTERVIEW YEAR";
@@ -64,6 +65,7 @@ label variable hours "ANNUAL HOURS WORKED";
 label variable lim_kindwork "LIMITED IN KIND OF WORK BC OF HEALTH";
 label variable lim_amountwork "LIMITED IN AMOUNT OF WORK BC OF HEALTH";
 label variable occupation "OCC OF MOST RECENT JOB, 2002 CENSUS CODE";
+label variable urban "CURRENT RESIDENCE IN URBAN/RURAL AREA";
 
 // code missing variables;
 do code/build2_missing.do;

@@ -26,6 +26,9 @@ local vars 	biofather_highgrade
 foreach var of local vars {;
 	replace `var' = . if `var' == 95;
 };
+
+// replace 'unkown' with .;
+replace urban = . if urban == 2;
 	
 // replace 'no information';
 replace sex = . if sex == 0;
