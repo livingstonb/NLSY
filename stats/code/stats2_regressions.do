@@ -17,13 +17,16 @@ local coeffs 	height1997 "Teen height (in)"
 				weight1997 "Weight in 1997, lbs"
 				weight2013 "Weight in 2013, lbs";
 
-foreach gender in men women {;
+foreach gender in pooled men women {;
 
 	if "`gender'" == "men" {;
 		local cond "(sex == 1)";
 	};
-	else {;
+	else if "`gender'" == "women" {;
 		local cond "(sex == 2)";
+	};
+	else {;
+		local cond "(sex == 1) | (sex == 2)";
 	};
 
 /* -----------------------------------------------------------------------------
@@ -75,7 +78,7 @@ CONTROLLING FOR FAMILY CHARACTERISTICS AND TEEN HEIGHT
 		ar2
 		nomtitles
 		noconst
-		title("Effect on 2014 log hourly wage with family controls, `gender'")
+		title("Effect on 2014 log hourly wage with family controls and teen height, `gender'")
 		nonotes
 		addnotes(	"Heteroskedasticity-robust standard errors in parentheses"
 					"* p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001")

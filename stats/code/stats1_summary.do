@@ -30,13 +30,16 @@ local coeffs 	height1997 "Teen height (inches)"
 				siblings2011 "Number of siblings";
 					
 
-foreach gender in men women {;
+foreach gender in pooled men women {;
 
 	if "`gender'" == "men" {;
 		local cond "(sex == 1)";
 	};
-	else {;
+	else if "`gender'" == "women" {;
 		local cond "(sex == 2)";
+	};
+	else {;
+		local cond "(sex == 1) | (sex == 2)";
 	};
 	
 	// median teen, adult height;
