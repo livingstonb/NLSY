@@ -1,4 +1,5 @@
 #delimit ;
+set more 1;
 
 /* -----------------------------------------------------------------------------
 VARIABLE CREATION
@@ -127,36 +128,9 @@ label values evermarried yesno;
 label variable div_sep "DIVORCED OR SEPARATED?";
 label values div_sep yesno;
 
-/* -----------------------------------------------------------------------------
-CREATE ADULT/TEEN VARIABLES
------------------------------------------------------------------------------*/;
-
-// teen and adult height;
-gen teentemp = height if year == 1997;
-bysort id: egen teenheight = max(teentemp);
-label variable teenheight "HEIGHT (IN) IN 1997";
-
-gen adulttemp = height if year == 2011;
-bysort id: egen adultheight = max(adulttemp);
-label variable adultheight "HEIGHT (IN) IN 2011";
-
-drop teentemp adulttemp;
-
-// hh size as a teen;
-gen temp = hhsize if year == 1998;
-bysort id: egen teenhhsize = max(temp);
-label variable teenhhsize "HH SIZE IN 1998";
-drop temp;
-
-// income;
-gen temp1 = lincomerate if year == 2010;
-bysort id: egen adultlincomerate = max(temp1);
-label variable adultlincomerate "LOG INCOME/HR WORKED IN 2010";
-
-gen temp2 = lincome if year == 2010;
-bysort id: egen adultlincome = max(temp2);
-label variable adultlincome "LOG INCOME/HR WORKED IN 2010";
-
+// youngheight;
+bysort id: egen temp = max(height) if inlist(year,1997,1998);
+bysort id: egen youngheight = max(temp);
 drop temp;
 
 /* -----------------------------------------------------------------------------
@@ -166,4 +140,5 @@ VARIABLE ADJUSTMENTS
 // data is provided with 2 implied decimal places (e.g. 300 instead of 3.00);
 replace cgpa = cgpa / 100;
 replace cumwt = cumwt / 100;
+replace panwt = panwt / 100;
 

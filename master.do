@@ -1,4 +1,6 @@
 #delimit ;
+set more 1;
+
 clear;
 
 // choose main directory;

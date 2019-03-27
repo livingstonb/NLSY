@@ -1,11 +1,10 @@
 #delimit ;
+set more 1;
 
 /* OLS estimatation of preliminary regressions */;
 
-keep if year == 2011;
-
-reg adultlincomerate adultheight, robust;
-reg adultlincomerate adultheight teenheight, robust;
-reg adultlincomerate adultheight teenheight age 
+reg lincomerate2010 height2010, robust;
+reg lincomerate2010 height2010 youngheight, robust;
+reg lincomerate2010 height2010 youngheight age2010 
 	resmother_highgrade resfather_highgrade
-	teenhhsize, robust;
+	hhsize1998, robust;

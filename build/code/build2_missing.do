@@ -1,4 +1,5 @@
 #delimit ;
+set more 1;
 
 /* -----------------------------------------------------------------------------
 REPLACE MEANINGFUL NEGATIVE VALUES

@@ -1,4 +1,5 @@
 #delimit ;
+set more 1;
 
 /* build.do constructs a cleaned dataset from the NLSY97 dictionary in 'input' */
 
@@ -13,35 +14,35 @@ quietly do input/NLSY97-value-labels.do;
 do code/build1_rename.do;
 
 // reshape long;
-local longvars	age 
-				hhsize 
-				highgrade 
-				highdegr 
-				piat
-				income
-				children
-				health
-				energy
-				feet
-				inches
-				weight
-				healthlim
-				emotlim
-				painlim
-				bullied_12to18_y
-				cumwt
-				panwt
-				hhincome
-				hhincsource
-				hours
-				lim_kindwork
-				lim_amountwork
-				occupation
-				urban
-				cregion
-				workwks
-				married;
-
+local longvars		age 
+					hhsize 
+					highgrade 
+					highdegr 
+					piat
+					income
+					children
+					health
+					energy
+					feet
+					inches
+					weight
+					healthlim
+					emotlim
+					painlim
+					bullied_12to18_y
+					cumwt
+					panwt
+					hhincome
+					hhincsource
+					hours
+					lim_kindwork
+					lim_amountwork
+					occupation
+					urban
+					cregion
+					workwks
+					married;
+					
 quietly reshape long `longvars', i(id) j(year);
 label variable year "YEAR";
 label variable age "AGE";
