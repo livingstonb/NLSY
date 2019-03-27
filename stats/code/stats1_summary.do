@@ -14,7 +14,7 @@ egen adultmedianht = median(height2010);
 /* -----------------------------------------------------------------------------
 COMPUTATION
 -----------------------------------------------------------------------------*/;
-local sumvars 	youngheight
+local sumvars 	height1997
 				height2010
 				age2010
 				lincomerate2010
@@ -38,7 +38,7 @@ esttab BELOWMED ABOVEMED using ${stats}/output/summary.tex,
 	nostar
 	se
 	mtitles("`title1'" "`title2'")
-	coeflabels(	youngheight "Teen height (inches)"
+	coeflabels(	height1997 "Teen height (inches)"
 				height2010 "Adult height (inches)"
 				age2010 "Age"
 				lincomerate2010 "ln(wage per hour)"

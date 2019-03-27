@@ -128,11 +128,6 @@ label values evermarried yesno;
 label variable div_sep "DIVORCED OR SEPARATED?";
 label values div_sep yesno;
 
-// youngheight;
-bysort id: egen temp = max(height) if inlist(year,1997,1998);
-bysort id: egen youngheight = max(temp);
-drop temp;
-
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS
 -----------------------------------------------------------------------------*/;
