@@ -51,10 +51,10 @@ label values nwtopcode30 toplabel;
 label values nwtopcode35 toplabel;
 
 // topcode indicator for 1997 hh net worth according to parent;
-gen nwP1997topcode = 0 if !missing(networthP1997);
-replace nwP1997topcode = 1 if networthP1997 == 600000;
-label variable nwP1997topcode "1997 NET WORTH ACCD TO PARENT, TOPCODED?";
-label values nwP1997topcode toplabel;
+gen parentnetworth1997topcode = 0 if !missing(parentnetworth1997);
+replace parentnetworth1997topcode = 1 if parentnetworth1997 == 600000;
+label variable parentnetworth1997topcode "1997 NET WORTH ACCD TO PARENT, TOPCODED?";
+label values parentnetworth1997topcode toplabel;
 
 // topcode indicator for gross hh income;
 gen hhinctopcode = 0 if !missing(hhincome);
@@ -104,7 +104,7 @@ label define bullied_12to18lab 1 "YES" 0 "NO";
 label values bullied_12to18 bullied_12to18lab;
 label variable bullied_12to18 "BULLIED BETWEEN AGES 12 AND 18";
 
-// generate variable for total height in inches;
+// height variables;
 gen height = feet * 12 + inches;
 label variable height "TOTAL HEIGHT IN INCHES";
 
@@ -115,6 +115,9 @@ gen lincome = log(income);
 label variable incomerate "INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincomerate "LOG INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincome "LOG ANNUAL INCOME";
+
+gen lparentincome1996 = log(parent1inc1996 + parent2inc1996);
+label variable lparentincome1996 "TOTAL PARENT INCOME 1996, ANNUAL";
 
 // marital status;
 gen evermarried = 1 if inlist(married,1,2,3,4);

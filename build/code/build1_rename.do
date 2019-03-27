@@ -265,7 +265,7 @@ quietly {;
 	rename S1541700 hhincome2002;
 	rename S2011500 hhincome2003;
 	rename R1204600 hhincsource1997;
-	rename R1204700 networthP1997;
+	rename R1204700 parentnetworth1997;
 	rename Z9069800 hours1980;
 	rename Z9069900 hours1981;
 	rename Z9070000 hours1982;
@@ -424,5 +424,7 @@ quietly {;
 	rename T6745900 siblings2011;
 	rename T8219500	siblings2013;
 	rename U0114100 siblings2015;
+	rename R0609800 parent1inc1996;
+	rename R0610500 parent2inc1996;
 };
 

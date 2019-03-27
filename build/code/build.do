@@ -13,6 +13,10 @@ quietly do input/NLSY97-value-labels.do;
 // rename variables;
 do code/build1_rename.do;
 
+// generate some variables while still in wide format;
+gen hproportion = (feet1997 * 12 + inches1997) / (feet2010 * 12 + inches2010) * 100;
+label variable hproportion "1997 HEIGHT / 2010 HEIGHT * 100";
+
 // reshape long;
 local longvars		age 
 					hhsize 
