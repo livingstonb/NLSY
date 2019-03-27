@@ -17,6 +17,18 @@ local sumvars 	height1997
 				resmother_highgrade
 				resfather_highgrade
 				siblings2011;
+				
+local coeffs 	height1997 "Teen height (inches)"
+				height2011 "Adult height (inches)"
+				age2014 "Age"
+				lincomerate2014 "ln(wage per hour)"
+				cumhighgrade "Years of completed schooling"
+				evermarried2013 "Ever Married (\%)"
+				div_sep2013 "Divorced or separated (\%)"
+				resmother_highgrade "Mother's years of schooling"
+				resfather_highgrade "Father's years of schooling"
+				siblings2011 "Number of siblings";
+					
 
 foreach gender in men women {;
 
@@ -43,17 +55,7 @@ foreach gender in men women {;
 		nostar
 		se
 		mtitles("`title1'" "`title2'")
-		coeflabels(	height1997 "Teen height (inches)"
-					height2011 "Adult height (inches)"
-					age2014 "Age"
-					lincomerate2014 "ln(wage per hour)"
-					cumhighgrade "Years of completed schooling"
-					evermarried2013 "Ever Married (\%)"
-					div_sep2013 "Divorced or separated (\%)"
-					resmother_highgrade "Mother's years of schooling"
-					resfather_highgrade "Father's years of schooling"
-					siblings2011 "Number of siblings"
-					);
+		coeflabels(`coeffs');
 					
 	drop teenmedianht adultmedianht;
 };

@@ -62,6 +62,6 @@ do ${stats}/code/stats1_summary.do;
 /* -----------------------------------------------------------------------------
 PRELIMINARY REGRESSIONS
 -----------------------------------------------------------------------------*/;
-do ${stats}/code/stats2_prelimOLS.do;
+do ${stats}/code/stats2_regressions.do;
 
 

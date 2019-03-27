@@ -108,6 +108,14 @@ label variable bullied_12to18 "BULLIED BETWEEN AGES 12 AND 18";
 gen height = feet * 12 + inches;
 label variable height "TOTAL HEIGHT IN INCHES";
 
+xtile quartile_height1997 = height1997, nq(4);
+quietly tab quartile_height1997, gen(h1997quartile);
+label variable quartile_height1997 "QUARTILE OF 1997 HEIGHT";
+
+xtile quartile_height2011 = height2011, nq(4);
+quietly tab quartile_height2011, gen(h2011quartile);
+label variable quartile_height2001 "QUARTILE OF 2001 HEIGHT";
+
 // income variables;
 gen incomerate = income / hours;
 gen lincomerate = log(incomerate);

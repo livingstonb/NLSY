@@ -15,7 +15,7 @@ ASVAB scores are the respondent's scores on the Armed Services Vocational Aptitu
 Unfortunately NLSY97 does not have appear to have data on self esteem, parent occupation, or high school activities. We do have data on household income and net worth in 1997, as well as some variables on the home and neighborhood environment.
 
 \section{Summary statistics}
-Here I compute summary statistics for men and women separately, where each statistic is based on the restricted sample in which all variables in the table are nonmissing.
+Here I compute summary statistics for men and women separately, where each statistic is based on the restricted sample in which all variables in the table are nonmissing. Note the small sample sizes. I weight these statistics using the cumulative cases weights, which are designed for use when all time periods are needed. I don't think these are the correct weights but it's unclear, we'll have to discuss weighting at some point. NLSY97 has an online custom weighting program that allows the user to select specific years to produce a weighting scheme when only those years are used. It sounds like that's the way to go but I'm unsure.
 
 \begin{table}[h]
 \label{tab:summary_men}
@@ -32,6 +32,7 @@ Here I compute summary statistics for men and women separately, where each stati
 \clearpage
 
 \section{Regressions with family controls}
+These regressions are performed unweighted as recommended on the NLSY website.
 
 \newgeometry{margin=2cm}
 \begin{landscape}
@@ -46,6 +47,7 @@ Here I compute summary statistics for men and women separately, where each stati
 \clearpage
 
 \section{Regressions with health controls}
+These regressions are performed unweighted as recommended on the NLSY website.
 
 \input{../stats/output/OLShealthcontrols_men.tex}
 
