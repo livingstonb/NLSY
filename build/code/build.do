@@ -41,7 +41,8 @@ local longvars		age
 					urban
 					cregion
 					workwks
-					married;
+					married
+					siblings;
 					
 quietly reshape long `longvars', i(id) j(year);
 label variable year "YEAR";

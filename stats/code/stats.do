@@ -33,6 +33,7 @@ global longvars 	age
 					cregion
 					workwks
 					married
+					siblings
 					inctopcode
 					hhinctopcode
 					height
@@ -48,7 +49,7 @@ quietly reshape wide ${longvars}, i(id) j(year);
 SAMPLE SELECTION
 -----------------------------------------------------------------------------*/;
 
-keep if hours2010 >= 30;
+keep if hours2010 >= 1000;
 keep if sex == 1; // male only for now;
 keep if race == 4; // non-black and non-hispanic;
 

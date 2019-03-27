@@ -23,7 +23,7 @@ local sumvars 	youngheight
 				div_sep2010
 				resmother_highgrade
 				resfather_highgrade
-				hhsize1998;
+				siblings2011;
 
 mean `sumvars' if height2010 <= adultmedianht [pweight=cumwt1997];
 est store BELOWMED;
@@ -47,5 +47,5 @@ esttab BELOWMED ABOVEMED using ${stats}/output/summary.tex,
 				div_sep2010 "Divorced or separated (%)"
 				resmother_highgrade "Mother's years of schooling"
 				resfather_highgrade "Father's years of schooling"
-				hhsize1998 "Number of HH members in youth"
+				siblings2011 "Number of siblings"
 				);
