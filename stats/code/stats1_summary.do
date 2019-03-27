@@ -25,14 +25,13 @@ local sumvars 	height1997
 				resfather_highgrade
 				siblings2011;
 
-mean `sumvars' if height2010 <= adultmedianht [pweight=cumwt1997];
-est store BELOWMED;
-mean `sumvars' if height2010 > adultmedianht [pweight=cumwt1997];
-est store ABOVEMED;
+estimates clear;
+eststo: quietly mean `sumvars' if height2010 <= adultmedianht [pweight=cumwt1997];
+eststo: quietly mean `sumvars' if height2010 > adultmedianht [pweight=cumwt1997];
 
 local title1 "Adult Height <= Median";
 local title2 "Adult Height > Median"; 
-esttab BELOWMED ABOVEMED using ${stats}/output/summary.tex, 
+esttab using ${stats}/output/summary.tex, 
 	replace
 	nonumbers
 	nostar

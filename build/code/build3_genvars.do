@@ -140,3 +140,10 @@ replace cgpa = cgpa / 100;
 replace cumwt = cumwt / 100;
 replace panwt = panwt / 100;
 
+// adjust parent reported net worth to be reported in 100,000s;
+replace parentnetworth1997 = parentnetworth1997 / 100000;
+label variable parentnetworth1997 "HH NET WORTH RPTD BY PARENT, IN $100,000s";
+
+// ASVAB provided with 3 implied decimal places;
+replace asvab_score_pct = asvab_score_pct / 1000;
+
