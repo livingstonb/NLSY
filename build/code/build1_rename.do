@@ -426,5 +426,8 @@ quietly {;
 	rename U0114100 siblings2015;
 	rename R0609800 parent1inc1996;
 	rename R0610500 parent2inc1996;
+	
+	gen age2012 = age2011 + 1;
+	gen age2014 = age2013 + 1;
 };
 

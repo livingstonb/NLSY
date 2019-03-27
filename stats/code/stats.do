@@ -49,8 +49,7 @@ quietly reshape wide ${longvars}, i(id) j(year);
 SAMPLE SELECTION
 -----------------------------------------------------------------------------*/;
 
-keep if hours2010 >= 1000;
-keep if sex == 1; // male only for now;
+keep if hours2014 >= 1000;
 keep if race == 4; // non-black and non-hispanic;
 
 

@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage{pdflscape}
+
+\begin{document}
+
+\section{Sample description}
+I use non-black, non-hispanic men and women in the NLSY97 interviews. I define adult height as the height reported in the last available year, 2011. I use wage per hour in 2014, computed as annual wage and salary income divided by hours worked. Annual wage and salary income is topcoded at the top 2\% of income. Individuals with less than 1000 hours worked in 2014 are excluded from the sample. Number of siblings was only reported as early as 2011 so I use this figure. The figure I use for household net worth in 1997 was reported by parents.
+
+For completed years of schooling, I use variables indicating the highest grade completed, including years of college. This definition differs slightly from the definition used in Persico et al (2004), who use the age at which an individual left school - 5.
+
+ASVAB scores are the respondent's scores on the Armed Services Vocational Aptitude Battery (CAT-ASVAB), administered in 1997-1998. This test measures the respondent's knowledge and skills in 12 different topics.
+
+Unfortunately NLSY97 does not have appear to have data on self esteem, parent occupation, or high school activities. We do have data on household income and net worth in 1997, as well as some variables on the home and neighborhood environment.
+
+\section{Summary statistics}
+Here I compute summary statistics for men and women separately, where each statistic is based on the restricted sample in which all variables in the table are nonmissing.
+
+\begin{table}[h]
+\label{tab:summary_men}
+\caption{Summary statistics for men.}
+\input{../stats/output/summary_men.tex}
+\end{table}
+
+\begin{table}[h]
+\label{tab:summary_women}
+\caption{Summary statistics for women.}
+\input{../stats/output/summary_women.tex}
+\end{table}
+
+\clearpage
+
+\section{Regressions with family controls}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
+\input{../stats/output/OLSfamilycontrols_men.tex}
+\end{landscape}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
+\input{../stats/output/OLSfamilycontrols_women.tex}
+\end{landscape}
+
+\clearpage
+
+\section{Regressions with health controls}
+
+\input{../stats/output/OLShealthcontrols_men.tex}
+
+\input{../stats/output/OLShealthcontrols_women.tex}
+
+
+\end{document}
