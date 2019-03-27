@@ -115,6 +115,22 @@ label variable incomerate "INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincomerate "LOG INCOME/HR WORKED, CONVERTED FROM ANN INC";
 label variable lincome "LOG ANNUAL INCOME";
 
+// marital status;
+gen evermarried = 1 if inlist(married,1,2,3,4);
+replace evermarried = 0 if married == 0;
+gen div_sep = inlist(married,2,3);
+replace div_sep = 0 if inlist(married,0,1,4);
+
+label define yesno 0 "NO" 1 "YES";
+label variable evermarried "EVER MARRIED?";
+label values evermarried yesno;
+label variable div_sep "DIVORCED OR SEPARATED?";
+label values div_sep yesno;
+
+/* -----------------------------------------------------------------------------
+CREATE ADULT/TEEN VARIABLES
+-----------------------------------------------------------------------------*/;
+
 // teen and adult height;
 gen teentemp = height if year == 1997;
 bysort id: egen teenheight = max(teentemp);
@@ -132,17 +148,16 @@ bysort id: egen teenhhsize = max(temp);
 label variable teenhhsize "HH SIZE IN 1998";
 drop temp;
 
-// marital status;
-gen evermarried = 1 if inlist(married,1,2,3,4);
-replace evermarried = 0 if married == 0;
-gen div_sep = inlist(married,2,3);
-replace div_sep = 0 if inlist(married,0,1,4);
+// income;
+gen temp1 = lincomerate if year == 2010;
+bysort id: egen adultlincomerate = max(temp1);
+label variable adultlincomerate "LOG INCOME/HR WORKED IN 2010";
 
-label define yesno 0 "NO" 1 "YES";
-label variable evermarried "EVER MARRIED?";
-label values evermarried yesno;
-label variable div_sep "DIVORCED OR SEPARATED?";
-label values div_sep yesno;
+gen temp2 = lincome if year == 2010;
+bysort id: egen adultlincome = max(temp2);
+label variable adultlincome "LOG INCOME/HR WORKED IN 2010";
+
+drop temp;
 
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS

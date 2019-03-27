@@ -3,7 +3,7 @@ clear;
 
 // choose main directory;
 
-local OS mac; // windows, mac;
+local OS windows; // windows, mac;
 
 if 	"`OS'" == "windows" {;
 	global maindir C:/Users/Brian/Dropbox/BrianLivingstonRA/Height/NLSY;
