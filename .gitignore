@@ -13,3 +13,4 @@ default.NLSY97
 *.log
 
 *.aux
+**/.texpadtmp

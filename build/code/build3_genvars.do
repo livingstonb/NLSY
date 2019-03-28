@@ -133,6 +133,13 @@ label values evermarried yesno;
 label variable div_sep "DIVORCED OR SEPARATED?";
 label values div_sep yesno;
 
+// dummy for male gender;
+gen male = (sex == 1);
+replace male = . if missing(sex);
+
+// highest grade of either parent;
+egen parenthighgrade = rowmax(resfather_highgrade resmother_highgrade);
+
 /* -----------------------------------------------------------------------------
 VARIABLE ADJUSTMENTS
 -----------------------------------------------------------------------------*/;
