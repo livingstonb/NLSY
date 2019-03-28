@@ -42,8 +42,7 @@ foreach gender in pooled men women {;
 		local cond "(sex == 1) | (sex == 2)";
 	};
 	
-	// median teen, adult height;
-	egen teenmedianht = median(height1997) if `cond';
+	// median adult height;
 	egen adultmedianht = median(height2011) if `cond';
 	
 	estimates clear;
@@ -60,5 +59,5 @@ foreach gender in pooled men women {;
 		mtitles("`title1'" "`title2'")
 		coeflabels(`coeffs');
 					
-	drop teenmedianht adultmedianht;
+	drop adultmedianht;
 };

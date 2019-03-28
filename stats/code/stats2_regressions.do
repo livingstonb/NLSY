@@ -28,6 +28,11 @@ foreach gender in pooled men women {;
 	else {;
 		local cond "(sex == 1) | (sex == 2)";
 	};
+	
+	// height quartile dummies;
+	xtile temp = height1997 if `cond', nq(4);
+	quietly tab temp, gen(htquartile);
+	drop temp;
 
 /* -----------------------------------------------------------------------------
 CONTROLLING FOR FAMILY CHARACTERISTICS
@@ -39,12 +44,16 @@ CONTROLLING FOR FAMILY CHARACTERISTICS
 	eststo: quietly reg lincomerate2014 height2011 age2014 if `cond', robust;
 	eststo: quietly reg lincomerate2014 height2011 
 						resmother_highgrade resfather_highgrade
-						siblings2011 parentnetworth1997 if `cond', robust;
+						siblings2011 if `cond', robust;
 	eststo: quietly reg lincomerate2014 height2011 
 						resmother_highgrade resfather_highgrade
-						siblings2011 parentnetworth1997 age2014 
+						siblings2011 age2014 
 						asvab_score_pct if `cond', robust;
-
+	eststo: quietly reg lincomerate2014 height2011 
+						resmother_highgrade resfather_highgrade
+						siblings2011 age2014 parentnetworth1997
+						asvab_score_pct if `cond', robust;
+						
 	esttab using ${stats}/output/regressions/OLSfamily_`gender'.tex,
 		replace
 		se
@@ -70,8 +79,13 @@ CONTROLLING FOR FAMILY CHARACTERISTICS AND TEEN HEIGHT
 		siblings2011 parentnetworth1997 if `cond', robust;
 	eststo: quietly reg lincomerate2014 height2011 height1997 
 		resmother_highgrade resfather_highgrade
-		siblings2011 parentnetworth1997 age2014 asvab_score_pct if `cond', robust;
+		siblings2011 age2014 asvab_score_pct if `cond', robust;
+	eststo: quietly reg lincomerate2014 height2011 height1997 
+		resmother_highgrade resfather_highgrade parentnetworth1997
+		siblings2011 age2014 asvab_score_pct if `cond', robust;
 
+		
+		
 	esttab using ${stats}/output/regressions/OLSfamily_teenheight_`gender'.tex,
 		replace
 		se
@@ -110,4 +124,6 @@ CONTROLLING FOR HEALTH
 		addnotes(	"Heteroskedasticity-robust standard errors in parentheses"
 					"* p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001")
 		coeflabels(`coeffs');
+		
+	drop htquartile*;
 };
