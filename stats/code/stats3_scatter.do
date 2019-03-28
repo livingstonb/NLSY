@@ -18,27 +18,33 @@ else {;
 	local restrlabel;
 };
 
+if "$incvar" == "hourly" {;
+	local income lincomerate2014;
+};
+else if "$incvar" == "annual" {;
+	local income lincome2014;
+};
+
 /* -----------------------------------------------------------------------------
 LOG WAGE VS HEIGHT
 -----------------------------------------------------------------------------*/;
 
-twoway (scatter lincomerate2014 height2011 if (sex == 1) & `restr', msize(vtiny) mcolor(blue))
-		(scatter lincomerate2014 height2011 if (sex == 2) & `restr', msize(vtiny) mcolor(red))
-		(lfit lincomerate2014 height2011 if (sex == 1) & `restr', lcolor(blue)) 
-		(lfit lincomerate2014 height2011 if (sex == 2) & `restr', lcolor(red)) 
+twoway (scatter `income' height2011 if (sex == 1) & `restr', msize(vtiny) mcolor(blue))
+		(scatter `income' height2011 if (sex == 2) & `restr', msize(vtiny) mcolor(red))
+		(lfit `income' height2011 if (sex == 1) & `restr', lcolor(blue)) 
+		(lfit `income' height2011 if (sex == 2) & `restr', lcolor(red)) 
 		if height2011 > 50,
 	xtitle("2011 Height (in)")
-	ytitle("2014 log wage ($/hr)")
+	ytitle("2014 log ${incvar} income")
 	xlabel(50(10)90)
-	ylabel(0(1)5)
 	`graphopts';
-graph export ${stats}/output/figs/logwage_height`restrlabel'.png, replace;
+graph export ${stats}/output/figs/log${incvar}wage_height`restrlabel'.png, replace;
 
 /* -----------------------------------------------------------------------------
 RESIDUALS OF REG OF LOG WAGE ON ABILITY VS HEIGHT
 -----------------------------------------------------------------------------*/;
 
-quietly reg lincomerate2014 asvab_score_pct if `restr';
+quietly reg `income' asvab_score_pct if `restr';
 predict resid, residuals;
 
 twoway (scatter resid height2011 if (sex == 1) & `restr', msize(vtiny) mcolor(blue))
@@ -50,7 +56,7 @@ twoway (scatter resid height2011 if (sex == 1) & `restr', msize(vtiny) mcolor(bl
 	ytitle("Residuals")
 	xlabel(50(10)90)
 	`graphopts';
-graph export ${stats}/output/figs/residability_height`restrlabel'.png, replace;
+graph export ${stats}/output/figs/resid${incvar}_height`restrlabel'.png, replace;
 
 drop resid;
 graph close;

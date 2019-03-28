@@ -63,16 +63,22 @@ do ${stats}/code/stats1_summarytables.do;
 REGRESSIONS
 -----------------------------------------------------------------------------*/;
 global heightvar continuous;
-do ${stats}/code/stats2_regressions.do;
+//do ${stats}/code/stats2_regressions.do;
 global heightvar quartiles;
-do ${stats}/code/stats2_regressions.do;
+//do ${stats}/code/stats2_regressions.do;
 
 /* -----------------------------------------------------------------------------
 SCATTER PLOTS
 -----------------------------------------------------------------------------*/;
-// unrestricted;
-global restriction none;
-do ${stats}/code/stats3_scatter.do;
-// restrict to wage < federal minimum wage;
-global restriction fedminwage;
-do ${stats}/code/stats3_scatter.do;
+// create plots with and without minimum wage restriction;
+foreach res in none fedminwage {;
+	global restriction `res';
+	
+// create plots for both hourly and annual income variables;
+foreach inc in hourly annual {;
+	global incvar `inc';
+
+	// create scatter plots;
+	do ${stats}/code/stats3_scatter.do;
+};
+};
