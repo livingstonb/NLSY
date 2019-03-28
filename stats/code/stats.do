@@ -61,6 +61,8 @@ do ${stats}/code/stats1_summary.do;
 /* -----------------------------------------------------------------------------
 PRELIMINARY REGRESSIONS
 -----------------------------------------------------------------------------*/;
+global heightvar continuous;
 do ${stats}/code/stats2_regressions.do;
-
+global heightvar quartiles;
+do ${stats}/code/stats2_regressions.do;
 

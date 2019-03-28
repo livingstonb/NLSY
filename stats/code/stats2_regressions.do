@@ -5,6 +5,9 @@ set more 1;
 
 local coeffs 	height1997 "Teen height (in)"
 				height2011 "Adult height (in)"
+				htquartile2 "Dummy, 2nd height quartile"
+				htquartile3 "Dummy, 3rd height quartile"
+				htquartile4 "Dummy, 4th (top) height quartile"
 				age2014 "Age in 2014"
 				cumhighgrade "Years of completed schooling"
 				resmother_highgrade "Mother's years of schooling"
@@ -33,28 +36,37 @@ foreach gender in pooled men women {;
 	xtile temp = height1997 if `cond', nq(4);
 	quietly tab temp, gen(htquartile);
 	drop temp;
+	
+	if "$heightvar" == "continuous" {;
+		local adultheight height2011;
+		local htype hc;
+	};
+	else if "$heightvar" == "quartiles" {;
+		local adultheight htquartile2 htquartile3 htquartile4;
+		local htype hq;
+	};
 
 /* -----------------------------------------------------------------------------
 CONTROLLING FOR FAMILY CHARACTERISTICS
 -----------------------------------------------------------------------------*/;
 
 	estimates clear;
-	eststo: quietly reg lincomerate2014 height2011 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 asvab_score_pct if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 age2014 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 
+	eststo: quietly reg lincomerate2014 `adultheight' if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' asvab_score_pct if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' age2014 if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' 
 						resmother_highgrade resfather_highgrade
 						siblings2011 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 
+	eststo: quietly reg lincomerate2014 `adultheight' 
 						resmother_highgrade resfather_highgrade
 						siblings2011 age2014 
 						asvab_score_pct if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 
+	eststo: quietly reg lincomerate2014 `adultheight' 
 						resmother_highgrade resfather_highgrade
 						siblings2011 age2014 parentnetworth1997
 						asvab_score_pct if `cond', robust;
 						
-	esttab using ${stats}/output/regressions/OLSfamily_`gender'.tex,
+	esttab using ${stats}/output/regressions/OLSfamily_`htype'_`gender'.tex,
 		replace
 		se
 		ar2
@@ -71,22 +83,22 @@ CONTROLLING FOR FAMILY CHARACTERISTICS AND TEEN HEIGHT
 -----------------------------------------------------------------------------*/;
 
 	estimates clear;
-	eststo: quietly reg lincomerate2014 height2011 height1997 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 asvab_score_pct if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 asvab_score_pct if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014 if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 
 		resmother_highgrade resfather_highgrade
 		siblings2011 parentnetworth1997 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 
 		resmother_highgrade resfather_highgrade
 		siblings2011 age2014 asvab_score_pct if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 
 		resmother_highgrade resfather_highgrade parentnetworth1997
 		siblings2011 age2014 asvab_score_pct if `cond', robust;
 
 		
 		
-	esttab using ${stats}/output/regressions/OLSfamily_teenheight_`gender'.tex,
+	esttab using ${stats}/output/regressions/OLSfamily_teenheight_`htype'_`gender'.tex,
 		replace
 		se
 		ar2
@@ -103,17 +115,17 @@ CONTROLLING FOR HEALTH
 -----------------------------------------------------------------------------*/;
 
 	estimates clear;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014 if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014
 						lim_kindwork2007 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014
 						lim_amountwork2007 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014
 						lim_kindwork2007 lim_amountwork2007 if `cond', robust;
-	eststo: quietly reg lincomerate2014 height2011 height1997 age2014
+	eststo: quietly reg lincomerate2014 `adultheight' height1997 age2014
 						weight1997 weight2013 if `cond', robust;
 						
-	esttab using ${stats}/output/regressions/OLShealth_`gender'.tex,
+	esttab using ${stats}/output/regressions/OLShealth_`htype'_`gender'.tex,
 		replace
 		se
 		ar2
