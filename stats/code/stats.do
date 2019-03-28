@@ -70,4 +70,9 @@ do ${stats}/code/stats2_regressions.do;
 /* -----------------------------------------------------------------------------
 SCATTER PLOTS
 -----------------------------------------------------------------------------*/;
+// unrestricted;
+global restriction none;
+do ${stats}/code/stats3_scatter.do;
+// restrict to wage < federal minimum wage;
+global restriction fedminwage;
 do ${stats}/code/stats3_scatter.do;
