@@ -63,9 +63,9 @@ do ${stats}/code/stats1_summarytables.do;
 REGRESSIONS
 -----------------------------------------------------------------------------*/;
 global heightvar continuous;
-//do ${stats}/code/stats2_regressions.do;
+do ${stats}/code/stats2_regressions.do;
 global heightvar quartiles;
-//do ${stats}/code/stats2_regressions.do;
+do ${stats}/code/stats2_regressions.do;
 
 /* -----------------------------------------------------------------------------
 SCATTER PLOTS
