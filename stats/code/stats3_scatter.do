@@ -29,15 +29,13 @@ graph export ${stats}/output/figs/logwage_height.png, replace;
 RESIDUALS OF REG OF LOG WAGE ON ABILITY VS HEIGHT
 -----------------------------------------------------------------------------*/;
 
-quietly reg lincomerate2014 asvab_score_pct if sex == 1;
-predict resid1, residuals;
-quietly reg lincomerate2014 asvab_score_pct if sex == 2;
-predict resid2, residuals;
+quietly reg lincomerate2014 asvab_score_pct;
+predict resid, residuals;
 
 twoway (scatter resid1 height2011 if sex == 1, msize(vtiny) mcolor(blue))
 		(scatter resid2 height2011 if sex == 2, msize(vtiny) mcolor(red))
-		(lfit resid1 height2011 if sex == 1, lcolor(blue))
-		(lfit resid2 height2011 if sex == 2, lcolor(red))
+		(lfit resid height2011 if sex == 1, lcolor(blue))
+		(lfit resid height2011 if sex == 2, lcolor(red))
 		if height2011 > 50,
 	xtitle("2011 Height (in)")
 	ytitle("Residuals")
