@@ -55,14 +55,19 @@ keep if race == 4; // non-black and non-hispanic;
 /* -----------------------------------------------------------------------------
 SUMMARY STATISTICS
 -----------------------------------------------------------------------------*/;
-do ${stats}/code/stats1_summary.do;
+do ${stats}/code/stats1_summarytables.do;
 
 
 /* -----------------------------------------------------------------------------
-PRELIMINARY REGRESSIONS
+REGRESSIONS
 -----------------------------------------------------------------------------*/;
 global heightvar continuous;
 do ${stats}/code/stats2_regressions.do;
 global heightvar quartiles;
 do ${stats}/code/stats2_regressions.do;
 
+/* -----------------------------------------------------------------------------
+SCATTER PLOTS
+-----------------------------------------------------------------------------*/;
+
+do ${stats}/code/stats3_scatter.do;
