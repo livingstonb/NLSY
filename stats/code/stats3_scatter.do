@@ -101,20 +101,20 @@ else if "$scale" == "normal" {;
 RESIDUALS OF REG OF LOG WAGE ON ABILITY VS HEIGHT
 -----------------------------------------------------------------------------*/;
 
-if ("$scale" == "normal") & ("$fit" == "linear") {;
+if ("$scale" == "normal") {;
 
 	quietly reg `income' asvab_score_pct if `restr';
 	predict resid, residuals;
 
 	twoway (scatter resid height2011 if (sex == 1) & `restr', msize(vtiny) mcolor(blue))
 			(scatter resid height2011 if (sex == 2) & `restr', msize(vtiny) mcolor(red))
-			(lfitci resid height2011 if (sex == 1) & `restr', lcolor(blue) `cioptsm')
-			(lfitci resid height2011 if (sex == 2) & `restr', lcolor(red) `cioptsw'),
+			(`fittype' resid height2011 if (sex == 1) & `restr', lcolor(blue) `cioptsm')
+			(`fittype' resid height2011 if (sex == 2) & `restr', lcolor(red) `cioptsw'),
 		xtitle("2011 Height (in)")
 		ytitle("Residuals")
 		xlabel(50(10)90)
 		`graphopts';
-	graph export ${stats}/output/figs/resid${incvar}_height`restrlabel'.png, replace;
+	graph export ${stats}/output/figs/resid${incvar}_height`restrlabel'_${fit}.png, replace;
 
 	drop resid;
 	graph close;
