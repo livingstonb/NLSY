@@ -13,7 +13,7 @@ local graphopts note("")
 LOG WAGE VS HEIGHT
 -----------------------------------------------------------------------------*/;
 
-twoway (scatter lincomerate2014 height2011)
+twoway (scatter lincomerate2014 height2011, msize(vsmall))
 		(lfit lincomerate2014 height2011) 
 		if height2011 > 50 & lincomerate2014 > 0,
 	by(sex, `graphopts')
@@ -33,6 +33,7 @@ predict resid, residuals;
 twoway scatter resid height2011 
 	if lincomerate2014 > 0 & height2011 > 50,
 	by(sex, `graphopts')
+	msize(vsmall)
 	xtitle("2011 Height (in)")
 	ytitle("Residuals")
 	xlabel(50(10)90);

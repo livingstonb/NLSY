@@ -21,7 +21,8 @@ local coeffs 	height1997 "Teen height (in)"
 				weight1997 "Weight in 1997, lbs"
 				weight2013 "Weight in 2013, lbs"
 				hhsize1998 "1998 Number of HH members"
-				male "Male";
+				male "Male"
+				hginteraction "Adult height * male";
 
 foreach tcontrol in th noth {;
 	// whether or not to control for teen height;
@@ -33,7 +34,7 @@ foreach tcontrol in th noth {;
 		local th;
 		local thlab;
 	};
-foreach gender in pooled men women {;
+foreach gender in pooled pooledinteraction men women {;
 	if "`gender'" == "men" {;
 		local cond "(sex == 1)";
 		local gdummy;
@@ -47,17 +48,27 @@ foreach gender in pooled men women {;
 		local gdummy male;
 	};
 	
-	// height quartile dummies;
-	xtile temp = height1997 if `cond', nq(4);
-	quietly tab temp, gen(htquartile);
-	drop temp;
-	
 	if "$heightvar" == "continuous" {;
-		local adultheight height2011;
+		gen hginteraction = height2011 * male;
+		if "`gender'" == "pooledinteraction" {;
+			local adultheight height2011 hginteraction;
+		};
+		else {;
+			local adultheight height2011;
+		};
 		local htype hc;
 		local hlab "cont height";
 	};
 	else if "$heightvar" == "quartiles" {;
+		if "`gender'" == "pooledinteraction" {;
+			continue;
+		};
+		
+		// height quartile dummies;
+		xtile temp = height1997 if `cond', nq(4);
+		quietly tab temp, gen(htquartile);
+		drop temp;
+	
 		local adultheight htquartile2 htquartile3 htquartile4;
 		local htype hq;
 		local hlab "height quartiles";
@@ -85,7 +96,7 @@ foreach gender in pooled men women {;
 		ar2
 		nomtitles
 		noconst
-		title("Effect on 2014 log hourly wage with family controls`thlab', `gender', `hlab'")
+		title("Reg of log hourly wage with family controls`thlab', `gender', `hlab'")
 		nonotes
 		addnotes(	"Heteroskedasticity-robust standard errors in parentheses"
 					"* p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001")
@@ -105,6 +116,9 @@ foreach gender in pooled men women {;
 						lim_kindwork2007 lim_amountwork2007 if `cond', robust;
 	eststo: quietly reg lincomerate2014 `adultheight' `th' `gdummy' age2014
 						weight1997 weight2013 if `cond', robust;
+	eststo: quietly reg lincomerate2014 `adultheight' `th' `gdummy' age2014
+						weight1997 weight2013 
+						lim_kindwork2007 lim_amountwork2007 if `cond', robust;
 						
 	esttab using ${stats}/output/regressions/OLShealth_`tcontrol'_`htype'_`gender'.tex,
 		replace
@@ -112,13 +126,14 @@ foreach gender in pooled men women {;
 		ar2
 		nomtitles
 		noconst
-		title("Effect on 2014 log hourly wage with health controls`thlab', `gender', `hlab'")
+		title("Reg of log hourly wage with health controls`thlab', `gender', `hlab'")
 		nonotes
 		addnotes(	"Heteroskedasticity-robust standard errors in parentheses"
 					"* p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001")
 		coeflabels(`coeffs');
 		
-	drop htquartile*;
+	cap drop htquartile*;
+	cap drop hginteraction;
 	
 };
 };

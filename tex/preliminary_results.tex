@@ -51,6 +51,7 @@ Here I compute summary statistics for men and women separately, where each stati
 		\label{fig:residabilityheight}
 		\caption{Residuals of regression of log wage on ability vs. adult height}
 	\end{subfigure}
+	\caption{Scatter plots of adult height}
 \end{figure}
 
 \clearpage
@@ -76,6 +77,12 @@ Here I compute summary statistics for men and women separately, where each stati
 
 \newgeometry{margin=2cm}
 \begin{landscape}
+\subsection{Controlling for teen height, pooled with height-gender interaction}
+\input{../stats/output/regressions/OLSfamily_th_hc_pooledinteraction.tex}
+\end{landscape}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
 \subsection{Not controlling for teen height, men}
 \input{../stats/output/regressions/OLSfamily_noth_hc_men.tex}
 \end{landscape}
@@ -90,6 +97,12 @@ Here I compute summary statistics for men and women separately, where each stati
 \begin{landscape}
 \subsection{Not controlling for teen height, pooled}
 \input{../stats/output/regressions/OLSfamily_noth_hc_pooled.tex}
+\end{landscape}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
+\subsection{Not controlling for teen height, pooled with height-gender interaction}
+\input{../stats/output/regressions/OLSfamily_noth_hc_pooledinteraction.tex}
 \end{landscape}
 
 \newgeometry{margin=2cm}
@@ -129,7 +142,6 @@ Here I compute summary statistics for men and women separately, where each stati
 \input{../stats/output/regressions/OLSfamily_noth_hq_pooled.tex}
 \end{landscape}
 
-
 % regressions with health controls
 
 \newgeometry{margin=2cm}
@@ -153,6 +165,12 @@ Here I compute summary statistics for men and women separately, where each stati
 
 \newgeometry{margin=2cm}
 \begin{landscape}
+\subsection{Controlling for teen height, pooled with height-gender interaction}
+\input{../stats/output/regressions/OLShealth_th_hc_pooledinteraction.tex}
+\end{landscape}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
 \subsection{Not controlling for teen height, men}
 \input{../stats/output/regressions/OLShealth_noth_hc_men.tex}
 \end{landscape}
@@ -168,6 +186,13 @@ Here I compute summary statistics for men and women separately, where each stati
 \subsection{Not controlling for teen height, pooled}
 \input{../stats/output/regressions/OLShealth_noth_hc_pooled.tex}
 \end{landscape}
+
+\newgeometry{margin=2cm}
+\begin{landscape}
+\subsection{Not controlling for teen height, pooled with height-gender interaction}
+\input{../stats/output/regressions/OLShealth_noth_hc_pooledinteraction.tex}
+\end{landscape}
+
 
 \newgeometry{margin=2cm}
 \begin{landscape}
